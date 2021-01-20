@@ -25,6 +25,7 @@ jobs:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }} 
           body: |
             **Edit:** :test_tube: [CI has Started Image Build]( https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})
+          reactions: eyes 
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -49,7 +50,7 @@ jobs:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }} 
           body: |
            **Edit:** :v: [Image Build Successfull]( https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}) @${{github.event.client_payload.github.actor}}, Avaliable at: ```${{ env.IMAGE_URL }}``` 
-  
+          reactions: hooray, heart
       - name: Create fail comment
         if: failure()
         uses: peter-evans/create-or-update-comment@v1
@@ -58,4 +59,4 @@ jobs:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }} 
           body: |
            **Edit:** :facepalm: [Build and Push Image Failed]( https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})
-     
+          reactions: confused
